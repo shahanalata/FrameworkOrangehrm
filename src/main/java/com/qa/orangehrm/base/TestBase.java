@@ -12,19 +12,21 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
-public class TestBase {
+public class TestBase {   //driver invocation in this page
 
 public WebDriver driver;
  public Properties prop;
   public  FileInputStream fis;
-  public void driver_init() throws IOException {
+  public WebDriver driver_init() throws IOException {
+      //  Properties pro = new Properties();
       prop = new Properties();//where see properties file, file can read by properties Class,
-      fis = new FileInputStream("C:\\Users\\shahana\\IdeaProjects\\OrangeFrameWork\\src\\main\\java\\com\\qa\\orangehrm\\config\\config.properties");//file location where the file is
+      // FileInputStream fil= new FileInputStream();
+      fis = new FileInputStream("C:\\Users\\shahana\\IdeaProjects\\OrangeFrameWork\\src\\main\\java\\com.qa.orangehrm.config\\config.properties");//file location where the file is
       prop.load(fis);
-     // prop.getProperty("browser_Name");//firefox/edge/safari-we can change in config file
-    //  prop.getProperty("url");
+    // prop.getProperty("browser_Name");//firefox/edge/safari-we can change in config file
+     //prop.getProperty("url");
 
-       String browser_Name ="chrome";//firefox/edge/safari
+       String browser_Name ="chrome";//firefox/edge/safari/*//different type of url,for different stage//properties file*/
 
       if(browser_Name.equalsIgnoreCase("Chrome")){
            driver = new ChromeDriver();
@@ -39,9 +41,10 @@ public WebDriver driver;
       }
       driver.manage().window().maximize();
       driver.manage().deleteAllCookies();
-      driver. manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3));//for browser page loading-for whole page
-      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));//-for all web element.global wait-if need it will wait,if no need no wait
+      driver. manage().timeouts().pageLoadTimeout(Duration.ofSeconds(3000l));//for browser page loading-for whole page
+      driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2000l));//-for all web element.global wait-if need it will wait,if no need no wait
      driver.get(prop.getProperty("url"));
+     return driver;
   }
 
     public static void main(String[] args) throws IOException {
@@ -49,4 +52,5 @@ public WebDriver driver;
       tb.driver_init();
 
     }
+
 }
