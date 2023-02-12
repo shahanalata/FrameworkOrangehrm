@@ -38,7 +38,7 @@ public void validUserManagementTest(){
     @AfterMethod
     public void tearDown() throws InterruptedException {
         Thread.sleep(3000l);
-        driver.quit();
+      //  driver.quit();
     }
 
 
