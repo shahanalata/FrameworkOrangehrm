@@ -53,6 +53,9 @@ public class AdminPageTest extends TestBase {
         Thread.sleep(2000l);
         adminPage.userRole.click();
         commonUtils.doKeyDown(1);
+       // JavascriptExecutor js =(JavascriptExecutor)driver;
+      //  js.executeScript("arguments[0].scrollIntoView();",adminPage.userRoleOne);
+       // action.moveToElement(adminPage.userRoleOne).perform();
         Thread.sleep(2000l);
         action.sendKeys("O").perform();
         Thread.sleep(3000l);
@@ -74,7 +77,7 @@ public class AdminPageTest extends TestBase {
     @Test
     public void validUserTest() throws InterruptedException {
         Thread.sleep(2000l);
-        adminPage.userNameOne.sendKeys("brandling123S");
+        adminPage.userNameOne.sendKeys("branding123S");
         Thread.sleep(2000l);
         adminPage.userRole.click();
         commonUtils.doKeyDown(1);
@@ -89,16 +92,19 @@ public class AdminPageTest extends TestBase {
         adminPage.staTus.click();
         Thread.sleep(2000l);
         commonUtils.doKeyDown(1);
+        Thread.sleep(2000l);
         adminPage.searchButton.click();
         Thread.sleep(2000l);
         adminPage.deleteButton.click();
         Thread.sleep(3000l);
         adminPage.acceptDeleteMsg.click();
+        String b = adminPage.toastMsg.getText();
+        System.out.println(b);
     }
 
    @AfterMethod
     public void tearDown() throws InterruptedException {
         Thread.sleep(3000l);
-       // driver.quit();
+       driver.quit();
     }
 }

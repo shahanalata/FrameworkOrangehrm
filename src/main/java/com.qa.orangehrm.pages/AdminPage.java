@@ -15,6 +15,9 @@ public class AdminPage {
     @FindBy(xpath = "//div[@class='oxd-select-text oxd-select-text--active']//div//i[1]")
     public WebElement userRole;
 
+    @FindBy(xpath = "//div[@class='oxd-select-text oxd-select-text--active']//div[text()='Admin']")
+    public WebElement userRoleOne;
+
     @FindBy(xpath = "//input[@placeholder='Type for hints...']")
     public WebElement employeeName;
 
@@ -46,6 +49,8 @@ public class AdminPage {
     public WebElement acceptDeleteMsg;
     @FindBy(xpath = "//button[text()=' Reset ']")
     public WebElement resetButton;
+    @FindBy(xpath = "//div[@class='oxd-toast oxd-toast--success oxd-toast-container--toast']//div[@class='oxd-toast-content oxd-toast-content--success']")
+    public WebElement toastMsg;
 
 
 
