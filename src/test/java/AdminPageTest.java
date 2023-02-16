@@ -108,8 +108,9 @@ public class AdminPageTest extends TestBase {
         action.moveToElement(adminPage.foundChart).perform();
         int totalList = adminPage.recordList.size();
         System.out.println(totalList);//manually also show 50 users but msg is written 79/ sometimes 80
-        String s = driver.findElement(By.xpath("//span[@class='oxd-text oxd-text--span']")).getText();
+        String s = adminPage.foundRecordMSG.getText();
         System.out.println(s);
+
         StringBuffer st = new StringBuffer(s);
         st.delete(3, 18);
         st.deleteCharAt(0);

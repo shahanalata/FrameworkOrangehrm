@@ -76,8 +76,8 @@ public class AdminPage {
      @FindBy(xpath = "(//div[@class='oxd-table-row oxd-table-row--with-border']//div//div//label/input[@type='checkbox'])[2]")
      public WebElement checkButton;
 
-
-
+    @FindBy(xpath = "//span[@class='oxd-text oxd-text--span']")
+    public WebElement foundRecordMSG;
   public AdminPage(WebDriver driver)  {
 
       PageFactory.initElements(driver,this);
