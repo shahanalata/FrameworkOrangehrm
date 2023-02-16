@@ -3,10 +3,10 @@ import com.qa.orangehrm.pages.AdminPage;
 import com.qa.orangehrm.pages.DashBoardPage;
 import com.qa.orangehrm.pages.LoginPage;
 import com.qa.orangehrm.utils.CommonUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -52,10 +52,12 @@ public class AdminPageTest extends TestBase {
         adminPage.addButton.click();
         Thread.sleep(2000l);
         adminPage.userRole.click();
+        Thread.sleep(2000l);
         commonUtils.doKeyDown(1);
-       // JavascriptExecutor js =(JavascriptExecutor)driver;
-      //  js.executeScript("arguments[0].scrollIntoView();",adminPage.userRoleOne);
-       // action.moveToElement(adminPage.userRoleOne).perform();
+        //action.moveToElement(adminPage.userRoleOne).click().build().perform();
+        // JavascriptExecutor js =(JavascriptExecutor)driver;
+        //  js.executeScript("arguments[0].scrollIntoView();",adminPage.userRoleOne);
+        // action.moveToElement(adminPage.userRoleOne).perform();
         Thread.sleep(2000l);
         action.sendKeys("O").perform();
         Thread.sleep(3000l);
@@ -85,10 +87,9 @@ public class AdminPageTest extends TestBase {
         action.sendKeys("O").perform();
         Thread.sleep(3000l);
         adminPage.employeeNameList.click();
-       // commonUtils.doKeyDown(1);
-        //action.moveToElement(adminPage.employeeNameList).click();
+        // commonUtils.doKeyDown(1);
         //action.sendKeys(adminPage.employeeNameList).click();
-         Thread.sleep(2000l);
+        Thread.sleep(2000l);
         adminPage.staTus.click();
         Thread.sleep(2000l);
         commonUtils.doKeyDown(1);
@@ -102,9 +103,47 @@ public class AdminPageTest extends TestBase {
         System.out.println(b);
     }
 
-   @AfterMethod
+    @Test
+    public void validRecordTest() throws InterruptedException {
+        action.moveToElement(adminPage.foundChart).perform();
+        int totalList = adminPage.recordList.size();
+        System.out.println(totalList);//manually also show 50 users but msg is written 79/ sometimes 80
+        String s = driver.findElement(By.xpath("//span[@class='oxd-text oxd-text--span']")).getText();
+        System.out.println(s);
+        StringBuffer st = new StringBuffer(s);
+        st.delete(3, 18);
+        st.deleteCharAt(0);
+        System.out.println(st);
+        Assert.assertEquals(totalList, st);
+    }
+    @Test
+    public void validCheckList() throws InterruptedException {
+        action.moveToElement(adminPage.foundChart).perform();
+        Thread.sleep(2000l);
+        adminPage.checkList.click();
+        Thread.sleep(2000l);
+        adminPage.checkList.click();
+        Thread.sleep(2000l);
+        adminPage.userAscending.click();
+        Thread.sleep(2000l);
+        action.moveToElement(adminPage.ascendingBtn).click().build().perform();
+        Thread.sleep(2000l);
+        action.moveToElement(adminPage.checkButton).click().build().perform();
+        Thread.sleep(2000l);
+        adminPage.deleteMsgUP.click();
+        Thread.sleep(2000l);
+        adminPage.acceptDeleteMsg.click();
+        Thread.sleep(2000l);
+        String d = adminPage.toastMsg.getText();
+        System.out.println(d);
+    }
+
+    // String b = adminPage.deleteMsgUP.getText();
+    //System.out.println(b);
+
+    @AfterMethod
     public void tearDown() throws InterruptedException {
         Thread.sleep(3000l);
-       driver.quit();
+        driver.quit();
     }
 }

@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class AdminPage {
     private WebDriver driver;
 
@@ -52,8 +54,27 @@ public class AdminPage {
     @FindBy(xpath = "//div[@class='oxd-toast oxd-toast--success oxd-toast-container--toast']//div[@class='oxd-toast-content oxd-toast-content--success']")
     public WebElement toastMsg;
 
+    @FindBy(xpath = "//div[@class='orangehrm-container']//div[@role='rowgroup'][2]/div")
+    public WebElement foundChart;
 
+    //div[@role='rowgroup'][2]
+    @FindBy(xpath = "//div[@class='orangehrm-container']//div[@role='rowgroup'][2]/div")
+    public List<WebElement> recordList;
 
+    @FindBy(xpath = "//div[@class='oxd-table-header-cell oxd-padding-cell oxd-table-th']//label")
+    public WebElement checkList;
+
+    @FindBy(xpath="//i[@class='oxd-icon bi-trash-fill oxd-button-icon']")
+    public WebElement deleteMsgUP;
+
+    @FindBy(xpath="//div[text()='Username']//div[@class='oxd-table-header-sort']")
+    public WebElement userAscending;
+
+    @FindBy(xpath = "//ul[@role='menu']//li//span[text()='Ascending']")
+    public WebElement ascendingBtn;
+
+     @FindBy(xpath = "(//div[@class='oxd-table-row oxd-table-row--with-border']//div//div//label/input[@type='checkbox'])[2]")
+     public WebElement checkButton;
 
 
 
