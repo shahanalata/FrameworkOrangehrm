@@ -3,15 +3,15 @@ import com.qa.orangehrm.pages.AdminPage;
 import com.qa.orangehrm.pages.DashBoardPage;
 import com.qa.orangehrm.pages.LoginPage;
 import com.qa.orangehrm.utils.CommonUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 public class AdminPageTest extends TestBase {
@@ -53,12 +53,12 @@ public class AdminPageTest extends TestBase {
         adminPage.addButton.click();
         Thread.sleep(2000l);
         adminPage.userRole.click();
-       // Thread.sleep(2000l);
+        // Thread.sleep(2000l);
         //commonUtils.doKeyDown(1);
         //action.moveToElement(adminPage.userRoleOne).click().build().perform();
-         JavascriptExecutor js =(JavascriptExecutor)driver;
-        js.executeScript("arguments[0].scrollIntoView();",adminPage.userRoleOne);
-       // js.executeScript(adminPage.userRoleOne)
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", adminPage.userRoleOne);
+        // js.executeScript(adminPage.userRoleOne)
         js.executeScript("arguments[0].click();", adminPage.userRoleOne);
         // action.moveToElement(adminPage.userRoleOne).perform();
         Thread.sleep(2000l);
@@ -110,21 +110,22 @@ public class AdminPageTest extends TestBase {
     public void validRecordTest() throws InterruptedException {
         action.moveToElement(adminPage.foundChart).perform();
         int totalList = adminPage.recordList.size();
-        System.out.println("The size of the list:  "+totalList);//manually also show 50 users but msg is written 79/ sometimes 80
+        System.out.println("The size of the list:  " + totalList);//manually also show 50 users but msg is written 79/ sometimes 80
         String s = adminPage.foundRecordMSG.getText();
-        System.out.println("Message of the recordlist: "+s);
+        System.out.println("Message of the recordlist: " + s);
 
         StringBuffer st = new StringBuffer(s);
         st.delete(3, 18);
         st.deleteCharAt(0);
-        System.out.println("Number of the recordlist: "+st);
+        System.out.println("Number of the recordlist: " + st);
         Assert.assertEquals(totalList, Integer.parseInt(String.valueOf(st)));
         //wrapper class
 
 
     }
+
     @Test
-    public void validCheckList() throws InterruptedException {
+    public void validCheckList() throws InterruptedException, IOException {
         action.moveToElement(adminPage.foundChart).perform();
         Thread.sleep(2000l);
         adminPage.checkList.click();
@@ -143,6 +144,13 @@ public class AdminPageTest extends TestBase {
         Thread.sleep(2000l);
         String d = adminPage.toastMsg.getText();
         System.out.println(d);
+        // File sourceFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        //String currentDir = System.getProperty("user.dir");
+        //  FileUtils.copyFile(sourceFile, new File(currentDir+"//screenshot//"+"Practice.png"));
+        File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String currentDirectory = System.getProperty("user.dir");
+        String destination = currentDirectory + "//screenshot//" + "Picture.png";
+        FileUtils.copyFile(source, new File(destination));
     }
 
     // String b = adminPage.deleteMsgUP.getText();

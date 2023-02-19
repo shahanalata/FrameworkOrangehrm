@@ -19,6 +19,11 @@ public class DashBoardPage {
 
  @FindBy(xpath ="//span[text()='PIM']")
  public WebElement pimButton;
+
+
+//(//a[@class='oxd-main-menu-item'])[10]
+    @FindBy(xpath = "//span[text()='Buzz']")
+    public WebElement buzzButton;
  public DashBoardPage(WebDriver driver){
 
      PageFactory.initElements(driver,this);
